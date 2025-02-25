@@ -51,7 +51,6 @@ bool isDigit(char c);
 
 const char* diff (const char* expr);
 
-
 void* derivNum();
 void* derivVar();
 void* derivAdd(Expr* expr);
@@ -783,7 +782,7 @@ void* expr(TokensList t, int* idx, int sz) {
         case MINUS: newExpr->interpretThyself = derivSub; break;
         case STAR: newExpr->interpretThyself = derivMult; break;
         case SLASH: newExpr->interpretThyself = derivQuot; break;
-        case POW: newExpr->interpretThyself = derivPow; break;
+        //case POW: newExpr->interpretThyself = derivPow; break;
         case SIN: newExpr->interpretThyself = derivSin; break;
         case COS: newExpr->interpretThyself = derivCos; break;
         case TAN: newExpr->interpretThyself = derivTan; break;
@@ -839,24 +838,8 @@ void* operand(TokensList t, int* idx, int sz) {
   return NULL;
 }
 
-const char* diff (const char* expr) {
-  TokensList tokens = tokenize(expr);
 
-  int* idx;
-  int i = 0;
-  idx = &i;
-  void* res = parse(tokens, idx, (int) tokens.size);
-  printAST(res);
-  printf("<- AST\n");
-  void* dis = dispatch(res);
-  printAST(dis);
-  printf("<- EVAL\n");
-  return lisptify(simplify(dis));
-}
-
-
-int main()
-{
+int main() {
     printf("Hello world!\n");
     return 0;
 }
